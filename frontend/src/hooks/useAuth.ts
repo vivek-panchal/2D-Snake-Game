@@ -1,7 +1,24 @@
 import { create } from 'zustand';
 import { loginUser, registerUser } from '../utils/api';
 
-const useAuthStore = create((set) => ({
+export interface User {
+  id: string;
+  username: string;
+  createdAt: string;
+}
+
+export interface AuthSlice {
+  user: User | null;
+  loading: boolean;
+  error: string | null;
+  
+  login: (username: string) => Promise<User>;
+  register: (username: string) => Promise<User>;
+  logout: () => void;
+  clearError: () => void;
+}
+
+const useAuthStore = create<AuthSlice>((set) => ({
   user: JSON.parse(localStorage.getItem('user') || 'null'),
   loading: false,
   error: null,
