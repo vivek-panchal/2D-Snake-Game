@@ -1,54 +1,95 @@
-# React + TypeScript + Vite
+# Snake Game Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend application for the Snake Game, built with React and Tailwind CSS.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React.js** - Frontend library for building the user interface
+- **Tailwind CSS** - Utility-first CSS framework for styling
+- **Zustand** - State management library (Assumption for state managment Zustand is used)
+- **React Router** - Client-side routing
+- **Axios** - HTTP client for API requests
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Interactive 2D Snake game with keyboard controls
+- User authentication (login with username)
+- Real-time score tracking
+- Global leaderboard
+- Responsive design
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Setup Instructions
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+
+### Installation Steps
+
+1. Clone the repository and navigate to the frontend directory:
+   ```bash
+   cd snake-game/frontend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+
+The application will be available at http://localhost:3000.
+
+## Game Controls
+
+- **Arrow Keys** - Control the snake's direction (Up, Down, Left, Right)
+- **Spacebar** - Pause/Resume game
+
+## Folder Structure
+
+```
+frontend/
+├── public/                # Static assets
+├── src/
+│   ├── components/        # Reusable UI components
+│   │   ├── GameBoard.tsx  # Snake game board
+│   │   ├── Login.tsx      # Login form
+│   │   ├── Navbar.tsx     # Navigation bar
+│   │   ├── Scoreboard.tsx # Score display
+│   ├── hooks/           # State management
+│   │   ├── useAuth.ts # Authentication store (using Zustand)
+│   ├── pages/             # Page components
+│   │   ├── Game.tsx       # Game page
+│   │   ├── Home.tsx       # Home page
+│   │   ├── Leaderboard.tsx# Leaderboard page
+│   ├── utils/             # Utility functions
+│   │   ├── api.ts         # API service
+│   │   ├── gameLogic.ts   # Game mechanics
+│   ├── App.tsx             # Main component
+│   ├── index.tsx           # Entry point
+│   └── index.css          # Global styles and Tailwind imports
+├── package.json           # Dependencies and scripts
+├── tailwind.config.js     # Tailwind CSS configuration
+└── README.md              # Frontend documentation
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Building for Production
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+To create a production build:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm run build
 ```
+
+The build will be created in the `build` directory.
+
+## API Connection
+
+The frontend communicates with the backend API for:
+- User authentication
+- Score submission
+- Leaderboard data retrieval
